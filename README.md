@@ -8,8 +8,12 @@ Chatbot actions represent statements and questions asked to the end user. Answer
 
 The bot API provides the following methods:
 
+- **ids()**: Returns the ids (tenant, id, legid)
+- **params()**: Returns the parameters
+- **body()**: Returns any remaining arguments
 - **state()**: Returns a copy of the current state
 - **activity()**: Returns a copy of the current activity
+- **version()**: Returns the current version (events length)
 - **play(events = [])**: Plays _talked_ or _answered_ from events array in order. Can be used to rehydrate the bot aggregate
 - **talk(mode)**: Pushes and returns current _talked_ event. Can be used to repeat questions and handle timeouts
 - **answer({ version, mode, ...payload})**: Pushes _answered_ event with provided transition payload (when active and version matches last event), and then pushes next _talked_ event in flow. Returns object with pushed events (and current state when flow ends).

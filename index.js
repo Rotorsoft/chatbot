@@ -14,7 +14,7 @@ const DEFAULTS = {
 const bot = (
   actions,
   reducer,
-  { tenant, id, legid, root, params, events = [] } = {},
+  { tenant, id, legid, root, params, events = [], ...body } = {},
   { invoked, shifted } = {}
 ) => {
   if (!tenant) throw Error("Missing tenant");
@@ -27,14 +27,6 @@ const bot = (
 
   const next = flow({ actions, params, reducer, invoked, shifted });
   let $ = next(actions[root]);
-
-  const state = () => ({ ...$.state });
-
-  const activity = () => {
-    const current = $.state[$.scope.name] || {};
-    current.type = current.type || DEFAULTS.TYPE;
-    return current;
-  };
 
   const play = (events = []) => {
     for (const e of events) {
@@ -91,7 +83,21 @@ const bot = (
   const _events = [];
   play(events);
 
-  return { state, activity, play, talk, answer };
+  return {
+    ids: () => ({ tenant, id, legid }),
+    params: () => ({ ...params }),
+    body: () => ({ ...body }),
+    state: () => ({ ...$.state }),
+    activity: () => {
+      const current = $.state[$.scope.name] || {};
+      current.type = current.type || DEFAULTS.TYPE;
+      return current;
+    },
+    version: () => _events.length,
+    play,
+    talk,
+    answer,
+  };
 };
 
 module.exports = { bot, reducer };
