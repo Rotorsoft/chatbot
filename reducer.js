@@ -34,7 +34,6 @@ module.exports = (lang, onaction = null) => (
   {
     time,
     activity,
-    type = "boolean",
     mode,
     text,
     value,
@@ -43,6 +42,7 @@ module.exports = (lang, onaction = null) => (
     ask,
     sms,
     transfer,
+    type = "boolean",
     ...rest
   }
 ) => {
@@ -79,7 +79,7 @@ module.exports = (lang, onaction = null) => (
     state.ask = ask[lang];
   }
   // copy rest to state
-  state[name] = Object.assign(state[name] || {}, rest);
+  state[name] = Object.assign(state[name] || {}, { type, ...rest });
   if (onaction) onaction(state);
   return state;
 };
