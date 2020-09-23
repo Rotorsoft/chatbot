@@ -1,0 +1,42 @@
+{
+  "name": "@rotorsoft/chatbot",
+  "version": "1.0.0",
+  "description": "A simple js chatbot",
+  "main": "index.js",
+  "author": "rotorsoft <rotorsoft@outlook.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha \"./tests/*.test.js\""
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1"
+  },
+  "keywords": [
+    "funcional",
+    "async",
+    "state",
+    "machine",
+    "chat",
+    "workflow",
+    "activity",
+    "bot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rotorsoft/chatbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rotorsoft/chatbot/issues"
+  },
+  "homepage": "https://github.com/rotorsoft/chatbot#readme",
+  "dependencies": {
+    "@rotorsoft/flow": "^1.1.1"
+  }
+}
