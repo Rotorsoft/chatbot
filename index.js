@@ -94,6 +94,7 @@ const bot = (
       return current;
     },
     version: () => _events.length,
+    events: () => [..._events],
     play,
     talk,
     answer,
