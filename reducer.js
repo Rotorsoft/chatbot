@@ -32,29 +32,22 @@ module.exports = (lang, onaction = null) => (
   state,
   { name = "$root", recur },
   {
+    // transition payload
     time,
     activity,
-    mode,
-    text,
-    value,
-    intent,
+    // action payload
     say,
     ask,
     sms,
     transfer,
-    type = "boolean",
+    // rest of state
     ...rest
   }
 ) => {
   // transition payloads are marked by activity and time
   if (time && activity) {
     commands.map((kw) => delete state[kw]);
-    state[activity] = Object.assign(state[activity] || {}, {
-      mode,
-      text,
-      value,
-      intent,
-    });
+    state[activity] = { ...state[activity], ...rest };
     return state;
   }
 
@@ -71,15 +64,15 @@ module.exports = (lang, onaction = null) => (
     if (recur && !say) {
       const r = repeat[lang];
       if (r) state.say = [r[Math.floor(Math.random() * r.length)]];
-      if (hint_modes.includes(mode)) {
-        const h = hint[lang][type];
+      if (hint_modes.includes(rest.mode)) {
+        const h = hint[lang][rest.type];
         if (h) state.say.push(h);
       }
     }
     state.ask = ask[lang];
   }
   // copy rest to state
-  state[name] = Object.assign(state[name] || {}, { type, ...rest });
+  if (Object.keys(rest).length) state[name] = { ...state[name], ...rest };
   if (onaction) onaction(state);
   return state;
 };
