@@ -64,8 +64,8 @@ module.exports = (lang, onaction = null) => (
     if (recur && !say) {
       const r = repeat[lang];
       if (r) state.say = [r[Math.floor(Math.random() * r.length)]];
-      if (hint_modes.includes(rest.mode)) {
-        const h = hint[lang][rest.type];
+      if (hint_modes.includes(rest.mode) && hint[lang]) {
+        const h = hint[lang][rest.type || "boolean"];
         if (h) state.say.push(h);
       }
     }
