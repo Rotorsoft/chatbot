@@ -52,7 +52,7 @@ describe("common", () => {
 
   it("should repeat", async () => {
     const events = [
-      { authenticate: { intent: "unknown" } },
+      { authenticate: { intent: "unknown", mode: "voice" } },
       { authenticate: { intent: "timeout" } },
       { authenticate: { intent: "yes" } },
     ];

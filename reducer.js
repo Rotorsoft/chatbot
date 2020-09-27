@@ -26,7 +26,7 @@ const hint = {
 };
 
 const hint_modes = ["voice", "dtmf"];
-const commands = ["say", "ask", "sms", "transfer"];
+const commands = ["say", "ask", "sms", "transfer", "mode"];
 
 module.exports = (lang, onaction = null) => (
   state,
@@ -48,6 +48,7 @@ module.exports = (lang, onaction = null) => (
   if (time && activity) {
     commands.map((kw) => delete state[kw]);
     state[activity] = { ...state[activity], ...rest };
+    state.mode = rest.mode;
     return state;
   }
 
@@ -64,7 +65,7 @@ module.exports = (lang, onaction = null) => (
     if (recur && !say) {
       const r = repeat[lang];
       if (r) state.say = [r[Math.floor(Math.random() * r.length)]];
-      if (hint_modes.includes(rest.mode) && hint[lang]) {
+      if (hint_modes.includes(state.mode) && hint[lang]) {
         const h = hint[lang][rest.type || "boolean"];
         if (h) state.say.push(h);
       }
