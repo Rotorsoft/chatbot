@@ -1,6 +1,6 @@
 {
   "name": "@rotorsoft/chatbot",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple js chatbot",
   "main": "index.js",
   "author": "rotorsoft <rotorsoft@outlook.com>",
