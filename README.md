@@ -15,6 +15,7 @@ The bot API provides the following methods:
 - **activity()**: Returns a copy of the current activity
 - **version()**: Returns the current version (events length)
 - **events()**: Returns array of events
+- **last()**: Last event or null if empty
 - **play(events = [])**: Plays _talked_ or _answered_ from events array in order. Can be used to rehydrate the bot aggregate
 - **talk(mode)**: Pushes and returns current _talked_ event. Can be used to repeat questions and handle timeouts
 - **answer({ version, mode, ...payload})**: Pushes _answered_ event with provided transition payload (when active and version matches last event), and then pushes next _talked_ event in flow. Returns object with pushed events (and current state when flow ends).
@@ -25,7 +26,7 @@ The bot API provides the following methods:
 talked: {
   name: "talked",
   time: new Date().toISOString(),
-  activity: 'current activity name',
+  activity: 'current activity name, "end" when flow is done'
   type: 'current activity type',
   mode: 'how talk event is delivered (voice, chat, sms, etc)',
   say: 'optional array of statements to say',
@@ -33,7 +34,6 @@ talked: {
   sms: 'optional sms string to deliver',
   transfer: 'optional string to transfer the conversation',
   asked: 'how many times this question has been asked',
-  ending: 'true when flow is ending - last statement',
   timeout: 'timeout to control retries',
 }
 

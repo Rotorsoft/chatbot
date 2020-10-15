@@ -43,9 +43,8 @@ const bot = (
     const { say = [], ask = "", sms, transfer, timeout = 10000 } = $.state;
     const { type = DEFAULTS.TYPE } = $.state[name] || {};
     const time = new Date().toISOString();
-    const ending = $.done;
     const asked = recur + 1;
-    const state = ending ? { ...$.state } : null;
+    const state = $.done ? { ...$.state } : null;
     const talked = {
       name: E.TALKED,
       time,
@@ -57,7 +56,6 @@ const bot = (
       sms,
       transfer,
       asked,
-      ending,
       timeout,
     };
     if (answered) answered.version = _events.push(answered);
@@ -95,6 +93,7 @@ const bot = (
     },
     version: () => _events.length,
     events: () => [..._events],
+    last: () => (_events.length ? { ..._events[_events.length - 1] } : {}),
     play,
     talk,
     answer,
