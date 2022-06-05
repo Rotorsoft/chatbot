@@ -14,7 +14,7 @@ jobs:
         uses: rotorsoft/semrel-analyze@v1
         with:
           package: 'chatbot'
-          directory: '/'
+          directory: 'chatbot'
           git-url: "${{ github.server_url }}/${{ github.repository }}"
           
       - run: echo "${{ toJSON(steps.analyze.outputs) }}"
