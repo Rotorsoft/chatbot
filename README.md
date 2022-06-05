@@ -1,6 +1,6 @@
 # _chatbot_
 
-### A functional js chatbot
+## A functional js chatbot
 
 This is just a semantic layer on top of the [flow](https://www.npmjs.com/package/@rotorsoft/flow) module showing how to implement a basic chatbot engine in JavaScript.
 
@@ -80,7 +80,7 @@ console.log(state);
 
 ### Test
 
-```
+```bash
 npm test
 ```
 
