@@ -1,0 +1,21 @@
+name: ci-cd
+
+on: [push]
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - id: analyze
+        uses: rotorsoft/semrel-analyze@v1
+        with:
+          package: 'chatbot'
+          directory: '/'
+          git-url: "${{ github.server_url }}/${{ github.repository }}"
+          
+      - run: echo "${{ toJSON(steps.analyze.outputs) }}"
+        shell: bash
