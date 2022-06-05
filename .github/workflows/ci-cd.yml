@@ -17,5 +17,9 @@ jobs:
           directory: 'chatbot'
           git-url: "${{ github.server_url }}/${{ github.repository }}"
           
-      - run: echo "${{ toJSON(steps.analyze.outputs) }}"
-        shell: bash
+      - name: analysis
+        run: |
+          echo "last-tag: ${{ steps.analyze.outputs.last-tag }}"
+          echo "next-tag: ${{ steps.analyze.outputs.next-tag }}"
+          echo "next-version: ${{ steps.analyze.outputs.next-version }}"
+          echo "${{ steps.analyze.outputs.change-log }}"
